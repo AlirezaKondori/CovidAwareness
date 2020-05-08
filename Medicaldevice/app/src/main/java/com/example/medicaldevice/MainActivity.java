@@ -13,8 +13,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
-    TextView text;
+    TextView text1;
+    TextView text2;
+    TextView text3;
     Button button;
 
     @Override
@@ -22,26 +28,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text = (TextView)findViewById(R.id.Text);
+        text1 = (TextView)findViewById(R.id.Text1);
+        text2 = (TextView)findViewById(R.id.Text2);
+        text3 = (TextView)findViewById(R.id.Text3);
         button = (Button)findViewById(R.id.button);
+        new doit().execute();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new doit().execute();
             }
         });
     }
     public class doit extends AsyncTask<Void,Void,Void>{
 
         String cases;
+        List<String> myList;
+        String num_cases;
+        String num_deaths;
+        String num_recovered;
         @Override
         protected Void doInBackground(Void... voids) {
 
             try {
                 Document doc = Jsoup.connect("https://www.worldometers.info/coronavirus/").get();
-                cases = doc.select("div.maincounter-number").select("span").text();
-
+                cases = doc.select("div.maincounter-number").select("span").text() + " ";
+                myList = new ArrayList<String>(Arrays.asList(cases.split(" ")));
+                num_cases = myList.get(0);
+                num_deaths = myList.get(1);
+                num_recovered = myList.get(2);
             }catch(Exception e) {e.printStackTrace();}
             return null;
         }
@@ -49,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            text.setText(cases);
+            text1.setText(num_cases);
+            text2.setText(num_deaths);
+            text3.setText(num_recovered);
 
         }
     }
