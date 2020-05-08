@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class MainActivity extends AppCompatActivity {
     TextView text;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 Document doc = Jsoup.connect("https://www.worldometers.info/coronavirus/").get();
-                cases = doc.text();
+                cases = doc.select("div.maincounter-number").select("span").text();
 
             }catch(Exception e) {e.printStackTrace();}
             return null;
