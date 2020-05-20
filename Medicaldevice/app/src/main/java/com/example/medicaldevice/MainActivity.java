@@ -2,6 +2,7 @@ package com.example.medicaldevice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView text2;
     TextView text3;
     Button button;
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +34,20 @@ public class MainActivity extends AppCompatActivity {
         text2 = (TextView)findViewById(R.id.Text2);
         text3 = (TextView)findViewById(R.id.Text3);
         button = (Button)findViewById(R.id.button);
+        button2 = (Button)findViewById(R.id.button2);
         new doit().execute();
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Main3Activity.class));
+            }
+        });
+        
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
             }
         });
     }
