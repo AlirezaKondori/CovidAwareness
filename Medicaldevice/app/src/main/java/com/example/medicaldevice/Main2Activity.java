@@ -6,15 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class Main2Activity extends AppCompatActivity {
+
+    Button button;
+    Button button2;
 
     ListView listView;
     String mTitle[] = {"Lion's Gate Hospital", "St. Paul's Hospital", "Vancouver General Hospital", "Burnaby hosptial", "BC Women's Hospital"};
@@ -27,8 +32,24 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         listView = findViewById(R.id.list);
+
+        button = (Button)findViewById(R.id.global);
+        button2 = (Button)findViewById(R.id.symptoms);
         myAdapter adapter = new myAdapter(this, mTitle, mDistance);
         listView.setAdapter(adapter);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Main2Activity.this, MainActivity.class));
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Main2Activity.this, Main3Activity.class));
+            }
+        });
     }
 
     class myAdapter extends ArrayAdapter<String> {
