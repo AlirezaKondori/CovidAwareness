@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            text1.setText(num_cases);
+            text3.setText(num_cases);
             text2.setText(num_deaths);
-            text3.setText(num_recovered);
+            text1.setText(num_recovered);
 
         }
     }
